@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Result – CoughSure{% endblock %}
+{% block content %}
+<h1 class="h4 mb-3">Screening result</h1>
+
+<div class="border rounded p-4 mb-3 risk-{{ overall_level }}">
+  <div class="fs-2 fw-bold">{{ overall_level }} Risk</div>
+  <div>{{ message }}</div>
+  <div class="small mt-2">Model score {{ '%.2f'|format(probability) }} (cough analysis alone: {{ model_level }})</div>
+  {% if raised_by_pollution %}
+  <div class="small mt-1"><strong>Raised to Medium</strong> because Delhi's air quality is {{ air.category }} –
+    prolonged exposure at this level is itself a respiratory risk.</div>
+  {% endif %}
+</div>
+
+{% include "_air.html" %}
+<p class="small">{{ air_advice }}</p>
+
+<div class="card mb-3"><div class="card-body">
+  <h2 class="h6">Your recording's spectrogram</h2>
+  <img src="{{ url_for('static', filename=image) }}" class="img-fluid" alt="Mel-spectrogram with saliency overlay">
+  <p class="small text-muted mb-1">Bright red/yellow areas are the time–frequency regions that most influenced the model's score.</p>
+  <p class="small text-muted mb-0">Most influential bands:
+    {% for b, hz, imp in bands %}~{{ '{:,.0f}'.format(hz) }} Hz{% if not loop.last %}, {% endif %}{% endfor %}</p>
+</div></div>
+
+<a href="/" class="btn btn-outline-primary">Screen another recording</a>
+{% endblock %}

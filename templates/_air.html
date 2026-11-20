@@ -1,0 +1,19 @@
+{% if air %}
+<div class="card mb-4">
+  <div class="card-body d-flex flex-wrap align-items-center gap-3">
+    <div class="text-white rounded px-3 py-2 text-center aqi-{{ air.category|replace(' ', '') }}">
+      <div class="fs-3 fw-bold">{{ air.aqi }}</div><div class="small">India AQI</div>
+    </div>
+    <div class="flex-grow-1">
+      <div class="fw-semibold">{{ air.location }} air quality: {{ air.category }}</div>
+      <div class="small text-muted">
+        PM2.5 {{ '%.0f'|format(air.pm2_5_now) if air.pm2_5_now is not none else '–' }} µg/m³ ·
+        PM10 {{ '%.0f'|format(air.pm10_now) if air.pm10_now is not none else '–' }} µg/m³ (now)
+        · {{ air.source }} · updated {{ air.time }}
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="alert alert-warning small">Live Delhi air-quality data is unavailable right now.</div>
+{% endif %}

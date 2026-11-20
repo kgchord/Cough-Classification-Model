@@ -1,0 +1,12 @@
+{
+  "train_acc": 0.6880252100840336,
+  "test_acc": 0.6436884512085944,
+  "test_auc": 0.7386030043093933,
+  "n_train": 3808,
+  "n_test": 1117,
+  "test_positive_rate": 0.2676813006401062,
+  "best_val_auc": 0.7502891421318054,
+  "epochs_run": 30,
+  "n_participants": 1904,
+  "preprocessing": "v2-fmin50"
+}

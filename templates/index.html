@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-1">CoughSure – TB Screening</h1>
+<p class="text-muted mb-4">Upload a cough recording to get a quick respiratory risk screen, adjusted for today's Delhi air quality.</p>
+
+{% include "_air.html" %}
+
+<div class="card mb-4"><div class="card-body">
+  <form action="/predict" method="post" enctype="multipart/form-data">
+    <label for="audio" class="form-label">Cough recording (.wav, a few seconds)</label>
+    <input class="form-control mb-3" type="file" id="audio" name="audio" accept=".wav,audio/wav" required>
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+</div></div>
+
+{% if history %}
+<h2 class="h6">Recent screenings on this device</h2>
+<table class="table table-sm small bg-white">
+  <thead><tr><th>Time</th><th>Model score</th><th>Risk</th><th>AQI</th></tr></thead>
+  <tbody>
+  {% for h in history %}
+    <tr><td>{{ h.time }}</td><td>{{ h.probability }}</td><td>{{ h.overall_level }}</td>
+        <td>{{ h.aqi }} {{ h.aqi_category }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

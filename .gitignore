@@ -1,0 +1,7 @@
+.venv/
+data/
+static/results/
+__pycache__/
+.pytest_cache/
+.claude/
+.DS_Store

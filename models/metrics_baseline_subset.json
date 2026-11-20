@@ -1,0 +1,10 @@
+{
+  "train_acc": 0.610223642172524,
+  "test_acc": 0.5208333333333334,
+  "test_auc": 0.5708333333333333,
+  "n_train": 313,
+  "n_test": 96,
+  "test_positive_rate": 0.625,
+  "best_val_auc": 0.6983024477958679,
+  "epochs": 5
+}
